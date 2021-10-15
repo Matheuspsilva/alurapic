@@ -3,7 +3,7 @@
 
     <h1>{{ titulo }}</h1>
     <ul>
-      <li v-for="foto of fotos">
+      <li v-for="foto of fotos" v-bind:key="foto.id">
         <img :src="foto.url" :alt="foto.titulo">
       </li>
     </ul>
@@ -16,18 +16,19 @@ export default {
   data(){
     return{
       titulo:'Alurapic',
-      fotos: [
-        {
-          url:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTwV4kVzT5McBdGSgqlVeRzubrNH_mOrrkKseDOGFURq20HmsrelEfMU7It',
-          titulo: 'cachorro'
-        },
-        {
-          url:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTwV4kVzT5McBdGSgqlVeRzubrNH_mOrrkKseDOGFURq20HmsrelEfMU7It',
-          titulo: 'labrador'
-        }
-      ]
+      fotos: []
 
     }
+  },
+
+  created(){
+
+    let promise = this.$http.get('http://localhost:3000/v1/fotos');
+
+    promise
+      .then(res => res.json())
+      .then(resultadoJson => this.fotos = resultadoJson, err => console.log(err));
+
   }
 }
 </script>

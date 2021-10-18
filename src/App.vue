@@ -2,7 +2,7 @@
   <div id="app" class="corpo">
     <h1 class="centralizado">{{ titulo }}</h1>
 
-    <input type="text" class="filtro" v-on:input="filtro = $event.target.value" placeholder="Filtre por parte do título">
+    <input type="text" class="filtro" @input="filtro = $event.target.value" placeholder="Filtre por parte do título">
     {{ filtro }}
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro" v-bind:key="foto.id">
